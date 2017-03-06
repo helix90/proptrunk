@@ -7,7 +7,7 @@ def hello_world():
     return 'Hello World'
 
 @app.route('/inventory')
-def inventort():
+def inventory():
     return 'Inventory'
 
 @app.route('/checkout')
