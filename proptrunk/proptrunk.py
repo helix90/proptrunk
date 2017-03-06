@@ -23,9 +23,8 @@ def user():
     return 'Users'
 
 @app.route('/reports')
-def reports()
+def reports():
     return 'Repoert'
 
 if __name__ == '__main__':
     app.run()
-
