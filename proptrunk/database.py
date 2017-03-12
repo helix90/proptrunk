@@ -23,8 +23,14 @@ zip
 class Person(Model):
     id = column(Integer, primary_key=True)
     username = column(String)
+    first_name = column(String)
+    last_name = column(String)
     email = column(String)
     phone = column(String)
+    mailing_address  = column(String)
+    city = column(String)
+    state = column(String)
+    zip = column(String)
 
 """
 Item
