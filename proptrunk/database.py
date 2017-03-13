@@ -103,6 +103,8 @@ item_number
 """
 class Order(Model):
     id = column(Integer, primary_key=True)
+    order_number = column(Integer)
+    item = column(Integer)
     # List of items
     # for whom
     #
@@ -118,6 +120,9 @@ date
 
 class Reservation(Model):
     id = column(Integer, primary_key=True)
+    item = column(Integer)
+    requestor = column(Integer)
+    date = column(DateTime)
     # Foredign keys here (Item ID)
 
 
