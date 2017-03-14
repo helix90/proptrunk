@@ -133,4 +133,8 @@ Database Access Functions
 def connect():
     # Connect to the Database
     # return a connection
+    return
 
+def create():
+    # Create the database if it doesn't exist
+    return
