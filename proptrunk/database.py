@@ -1,5 +1,10 @@
-from sqlalchemy import column, Integer, String
+from sqlalchemy import Column, Integer, String
 from sqlalchemy import Model, DateTime
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+
+
+Base = declarative_base()
 
 
 """
@@ -20,17 +25,19 @@ city
 state
 zip
 """
-class Person(Model):
-    id = column(Integer, primary_key=True)
-    username = column(String)
-    first_name = column(String)
-    last_name = column(String)
-    email = column(String)
-    phone = column(String)
-    mailing_address  = column(String)
-    city = column(String)
-    state = column(String)
-    zip = column(String)
+class Person(Base):
+    __tablename__ = 'Person'
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String)
+    first_name = Column(String)
+    last_name = Column(String)
+    email = Column(String)
+    phone = Column(String)
+    mailing_address  = Column(String)
+    city = Column(String)
+    state = Column(String)
+    zip = Column(String)
 
 """
 Item
@@ -45,15 +52,17 @@ key_words
 genre
 era
 """
-class Item(Model):
-    id = column(Integer, primary_key=True)
-    name = column(String)
-    description = column(String)
-    owner = column(Integer)
-    location = column(String, nullable=False)
-    key_words = column(String)
-    genre = column(String)
-    era = column(String)
+class Item(Base):
+    __tablename__ = 'Item'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    description = Column(String)
+    owner = Column(Integer)
+    location = Column(String, nullable=False)
+    key_words = Column(String)
+    genre = Column(String)
+    era = Column(String)
 
 """
 History
@@ -64,12 +73,14 @@ action
 item
 commiter
 """
-class History(Model):
-    id = column(Integer, primary_key=True)
-    date = column(DateTime)
-    action = column(String)  # Should be ENUM
-    item = column(Integer)
-    commiter = column(Integer)
+class History(Base):
+    __tablename__ = 'History'
+
+    id = Column(Integer, primary_key=True)
+    date = Column(DateTime)
+    action = Column(String)  # Should be ENUM
+    item = Column(Integer)
+    commiter = Column(Integer)
     # Insert foreign keys here
 
 """
@@ -81,17 +92,21 @@ indate
 commiter
 order_number
 """
-class CheckedOut(Model):
-    id = column(Integer, primary_key=True)
-    checkout_date = column(DateTime)
-    return_date = column(DateTime)
-    commiter = column(Integer)
-    order_number = column(Integer)
+class CheckedOut(Base):
+    __tablename__ = 'CheckedOut'
+
+    id = Column(Integer, primary_key=True)
+    checkout_date = Column(DateTime)
+    return_date = Column(DateTime)
+    commiter = Column(Integer)
+    order_number = Column(Integer)
     # Insert foreign key here (user ID)
 
-class CheckIn(Model):
-    id = column(Integer, primary_key=True)
-    checkin_date = column(DateTime)
+class CheckIn(Base):
+    __tablename__ = 'CheckIn'
+
+    id = Column(Integer, primary_key=True)
+    checkin_date = Column(DateTime)
     # mode foreign keys here
 
 """
@@ -101,10 +116,12 @@ id
 item_number
 ...
 """
-class Order(Model):
-    id = column(Integer, primary_key=True)
-    order_number = column(Integer)
-    item = column(Integer)
+class Order(Base):
+    __tablename__ = 'Order'
+
+    id = Column(Integer, primary_key=True)
+    order_number = Column(Integer)
+    item = Column(Integer)
     # List of items
     # for whom
     #
@@ -118,11 +135,14 @@ requestor
 date
 """
 
-class Reservation(Model):
-    id = column(Integer, primary_key=True)
-    item = column(Integer)
-    requestor = column(Integer)
-    date = column(DateTime)
+class Reservation(Base):
+    __tablename__ = 'Reservation'
+
+    id = Column(Integer, primary_key=True)
+    res_number = Column(Integer)
+    item = Column(Integer)
+    requestor = Column(Integer)
+    date = Column(DateTime)
     # Foredign keys here (Item ID)
 
 
@@ -133,8 +153,12 @@ Database Access Functions
 def connect():
     # Connect to the Database
     # return a connection
+    retval = create_engine()
     return
 
 def create():
     # Create the database if it doesn't exist
+    foo = connect
+    for model in models:
+
     return
