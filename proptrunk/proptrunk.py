@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return render_template('templates/index.html', title='Prop Trunk')
+    return render_template('index.html', title='Prop Trunk')
 
 @app.route('/inventory')
 def inventory():
