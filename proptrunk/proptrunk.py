@@ -1,4 +1,6 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_templateb
+
+from . import database
 
 app = Flask(__name__)
 
@@ -31,4 +33,5 @@ def not_found(error):
     return render_template('error.html'), 404
 
 if __name__ == '__main__':
+    conn = database.connect()
     app.run()
