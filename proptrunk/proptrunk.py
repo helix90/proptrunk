@@ -1,10 +1,12 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_templateb
+
+from . import database
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def hello_world():
-    return render_template('templates/index.html'. title='Prop Trunk')
+    return render_template('index.html', title='Prop Trunk')
 
 @app.route('/inventory', methods=['GET'])
 def get_inventory():
@@ -38,4 +40,5 @@ def not_found(error):
     return render_template('error.html'), 404
 
 if __name__ == '__main__':
+    conn = database.connect()
     app.run()
