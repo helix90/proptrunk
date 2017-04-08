@@ -2,12 +2,19 @@ from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def hello_world():
     return render_template('templates/index.html'. title='Prop Trunk')
 
-@app.route('/inventory')
-def inventory():
+@app.route('/inventory', methods=['GET'])
+def get_inventory():
+    return 'Inventory'
+
+@app.route('/inventory', methods=['POST'])
+def post_inventory():
+    # Process post body (JSON)
+    # Insert
+    # return object id
     return 'Inventory'
 
 @app.route('/checkout')
