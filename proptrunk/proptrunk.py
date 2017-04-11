@@ -1,4 +1,4 @@
-from flask import Flask, request, render_templateb
+from flask import Flask, request, render_template
 
 from . import database
 
