@@ -85,3 +85,19 @@ class Role(db.Model):
 
     def __repr__(self):
         return '<Role: {}>'.format(self.name)
+
+class Thing(db.Model):
+    """
+    Create a Thing table 
+    for physical objects
+    """
+
+    __tablename__ = 'thing'
+
+    id = db.Column(db.Integer, primary_key=True)
+    barcode = db.Column(db.String, unique=True)
+    name = db.Column(db.String)
+    description = db.Column(db.String)
+
+    def __repr__(selfself):
+        return '<Item>: {}'.format(self.name)
