@@ -1,9 +1,6 @@
-# proptrunk
-Prop and costume inventory system
+![featured-image](https://raw.githubusercontent.com/andela-mnzomo/project-dream-team-two/master/flask-crud-part-two.jpg)
 
-Database and RESTful application to address the needs of a prop and costume rental operation.  
+Initial code borrowed from:
+The code for Part Two of my three-part tutorial, *Build a CRUD Web App With Python and Flask*.
 
-* Allow multiple owners to store inventory
-* Allow multiple customers to reserve, rent and return inventory
-* Track who has rented what items
-* Provide reports of rental and storage of items
+Extended to provide the rest of the web site and RESTful interface to the proptrunk data.
