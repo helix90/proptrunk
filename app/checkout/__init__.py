@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-checkout = Blueprint('auth', __name__)
+checkout = Blueprint('checkout', __name__)
 
 from . import views
