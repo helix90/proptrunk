@@ -67,7 +67,7 @@ class Vendor(db.Model):
                                 lazy='dynamic')
 
     def __repr__(self):
-        return '<Department: {}>'.format(self.name)
+        return '<Vendor: {}>'.format(self.name)
 
 
 class Role(db.Model):
