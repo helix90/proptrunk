@@ -19,7 +19,7 @@ class Employee(UserMixin, db.Model):
     first_name = db.Column(db.String(60), index=True)
     last_name = db.Column(db.String(60), index=True)
     password_hash = db.Column(db.String(128))
-    department_id = db.Column(db.Integer, db.ForeignKey('departments.id'))
+    department_id = db.Column(db.Integer, db.ForeignKey('vendors.id'))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     is_admin = db.Column(db.Boolean, default=False)
 
@@ -53,17 +53,17 @@ def load_user(user_id):
     return Employee.query.get(int(user_id))
 
 
-class Department(db.Model):
+class Vendor(db.Model):
     """
-    Create a Department table
+    Create a Vendor table
     """
 
-    __tablename__ = 'departments'
+    __tablename__ = 'vendors'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
     description = db.Column(db.String(200))
-    employees = db.relationship('Employee', backref='department',
+    employees = db.relationship('Employee', backref='vendor',
                                 lazy='dynamic')
 
     def __repr__(self):
@@ -86,6 +86,7 @@ class Role(db.Model):
     def __repr__(self):
         return '<Role: {}>'.format(self.name)
 
+
 class Thing(db.Model):
     """
     Create a Thing table 
@@ -99,5 +100,5 @@ class Thing(db.Model):
     name = db.Column(db.String)
     description = db.Column(db.String)
 
-    def __repr__(selfself):
+    def __repr__(self):
         return '<Item>: {}'.format(self.name)
