@@ -8,6 +8,10 @@
                 <div class="item-message">
                     <h1>Project Prop Trunk</h1>
                     <h3>The best company in the world!</h3>
+                    <ul>
+                        {%  for item in items %}
+                        <p>{{ item }}</p>
+                        {% endfor %}
                     <hr class="item-divider">
                     </ul>
                 </div>
