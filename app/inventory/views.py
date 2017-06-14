@@ -12,4 +12,4 @@ def inventory():
 
     items = Thing.query.all()
     # render template
-    return render_template('inventory/inventory.html', items=items, title='Inventory')
+    return render_template('inventory/item.html', items=items, title='Inventory')
