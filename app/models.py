@@ -61,7 +61,7 @@ class Vendor(db.Model):
     __tablename__ = 'vendors'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(60), unique=True)
+    name = db.Column(db.String(60), unique=True)t
     description = db.Column(db.String(200))
     employees = db.relationship('Employee', backref='vendor',
                                 lazy='dynamic')
@@ -99,6 +99,7 @@ class Thing(db.Model):
     barcode = db.Column(db.String, unique=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
+    owner = db.Column(db.String)
 
     def __repr__(self):
         return '<Item>: {}'.format(self.name)
