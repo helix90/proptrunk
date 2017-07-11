@@ -16,21 +16,21 @@ def check_admin():
 # Department Views
 
 
-@admin.route('/departments', methods=['GET', 'POST'])
+@admin.route('/vendors', methods=['GET', 'POST'])
 @login_required
 def list_departments():
     """
-    List all departments
+    List all vendors
     """
     check_admin()
 
     departments = Department.query.all()
 
-    return render_template('admin/departments/departments.html',
+    return render_template('admin/vendors/vendors.html',
                            departments=departments, title="Departments")
 
 
-@admin.route('/departments/add', methods=['GET', 'POST'])
+@admin.route('/vendors/add', methods=['GET', 'POST'])
 @login_required
 def add_department():
     """
@@ -53,16 +53,16 @@ def add_department():
             # in case department name already exists
             flash('Error: department name already exists.')
 
-        # redirect to departments page
+        # redirect to vendors page
         return redirect(url_for('admin.list_departments'))
 
     # load department template
-    return render_template('admin/departments/department.html', action="Add",
+    return render_template('admin/vendors/department.html', action="Add",
                            add_department=add_department, form=form,
                            title="Add Department")
 
 
-@admin.route('/departments/edit/<int:id>', methods=['GET', 'POST'])
+@admin.route('/vendors/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_department(id):
     """
@@ -80,17 +80,17 @@ def edit_department(id):
         db.session.commit()
         flash('You have successfully edited the department.')
 
-        # redirect to the departments page
+        # redirect to the vendors page
         return redirect(url_for('admin.list_departments'))
 
     form.description.data = department.description
     form.name.data = department.name
-    return render_template('admin/departments/department.html', action="Edit",
+    return render_template('admin/vendors/department.html', action="Edit",
                            add_department=add_department, form=form,
                            department=department, title="Edit Department")
 
 
-@admin.route('/departments/delete/<int:id>', methods=['GET', 'POST'])
+@admin.route('/vendors/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_department(id):
     """
@@ -103,7 +103,7 @@ def delete_department(id):
     db.session.commit()
     flash('You have successfully deleted the department.')
 
-    # redirect to the departments page
+    # redirect to the vendors page
     return redirect(url_for('admin.list_departments'))
 
     return render_template(title="Delete Department")

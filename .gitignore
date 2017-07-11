@@ -90,3 +90,4 @@ ENV/
 
 # PyCharm IDE files
 .xml
+.idea/*

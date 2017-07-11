@@ -26,7 +26,7 @@ class RoleForm(FlaskForm):
 
 class EmployeeAssignForm(FlaskForm):
     """
-    Form for admin to assign departments and roles to employees
+    Form for admin to assign vendors and roles to employees
     """
     department = QuerySelectField(query_factory=lambda: Department.query.all(),
                                   get_label="name")
