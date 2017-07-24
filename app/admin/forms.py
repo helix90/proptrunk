@@ -3,12 +3,12 @@ from wtforms import StringField, SubmitField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired
 
-from ..models import Department, Role
+from ..models import Vendor, Role
 
 
-class DepartmentForm(FlaskForm):
+class VendorForm(FlaskForm):
     """
-    Form for admin to add or edit a department
+    Form for admin to add or edit a vendor
     """
     name = StringField('Name', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
@@ -28,7 +28,7 @@ class EmployeeAssignForm(FlaskForm):
     """
     Form for admin to assign vendors and roles to employees
     """
-    department = QuerySelectField(query_factory=lambda: Department.query.all(),
+    vendor = QuerySelectField(query_factory=lambda: Vendor.query.all(),
                                   get_label="name")
     role = QuerySelectField(query_factory=lambda: Role.query.all(),
                             get_label="name")
