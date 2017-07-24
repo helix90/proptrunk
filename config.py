@@ -5,6 +5,9 @@ class Config(object):
 
     # Put any configurations here that are common across all environments
 
+    # Testint database - do not use in production
+    SQLALCHEMY_DATABASE_URI = 'sqlite:proptrunk.db'
+
 
 class DevelopmentConfig(Config):
     """
