@@ -61,7 +61,7 @@ class Vendor(db.Model):
     __tablename__ = 'vendors'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(60), unique=True)t
+    name = db.Column(db.String(60), unique=True)
     description = db.Column(db.String(200))
     employees = db.relationship('Employee', backref='vendor',
                                 lazy='dynamic')
