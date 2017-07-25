@@ -6,7 +6,7 @@ class Config(object):
     # Put any configurations here that are common across all environments
 
     # Testint database - do not use in production
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///./proptrunk.db'
+    SQLALCHEMY_DATABASE_URI = 'SQLALCHEMY_DATABASE_URI = 'mysql://pt_admin:pt2017@localhost/proptrunk_db''
 
 
 class DevelopmentConfig(Config):
