@@ -96,10 +96,10 @@ class Thing(db.Model):
     __tablename__ = 'thing'
 
     id = db.Column(db.Integer, primary_key=True)
-    barcode = db.Column(db.String, unique=True)
-    name = db.Column(db.String)
-    description = db.Column(db.String)
-    owner = db.Column(db.String)
+    barcode = db.Column(db.String(64), unique=True)
+    name = db.Column(db.String(255))
+    description = db.Column(db.String(1024))
+    owner = db.Column(db.String(255))
 
     def __repr__(self):
         return '<Item>: {}'.format(self.name)
