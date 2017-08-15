@@ -18,93 +18,93 @@ def check_admin():
 
 @admin.route('/vendors', methods=['GET', 'POST'])
 @login_required
-def list_dendors():
+def list_vendors():
     """
     List all vendors
     """
     check_admin()
 
-    dendors = Vendor.query.all()
+    vendors = Vendor.query.all()
 
     return render_template('admin/vendors/vendors.html',
-                           dendors=dendors, title="Vendors")
+                           vendors=vendors, title="Vendors")
 
 
 @admin.route('/vendors/add', methods=['GET', 'POST'])
 @login_required
-def add_dendor():
+def add_vendor():
     """
-    Add a dendor to the database
+    Add a vendor to the database
     """
     check_admin()
 
-    add_dendor = True
+    add_vendor = True
 
     form = VendorForm()
     if form.validate_on_submit():
-        dendor = Vendor(name=form.name.data,
+        vendor = Vendor(name=form.name.data,
                                 description=form.description.data)
         try:
-            # add dendor to the database
-            db.session.add(dendor)
+            # add vendor to the database
+            db.session.add(vendor)
             db.session.commit()
-            flash('You have successfully added a new dendor.')
+            flash('You have successfully added a new vendor.')
         except:
-            # in case dendor name already exists
-            flash('Error: dendor name already exists.')
+            # in case vendor name already exists
+            flash('Error: vendor name already exists.')
 
         # redirect to vendors page
-        return redirect(url_for('admin.list_dendors'))
+        return redirect(url_for('admin.list_vendors'))
 
-    # load dendor template
-    return render_template('admin/vendors/dendor.html', action="Add",
-                           add_dendor=add_dendor, form=form,
+    # load vendor template
+    return render_template('admin/vendors/vendor.html', action="Add",
+                           add_vendor=add_vendor, form=form,
                            title="Add Vendor")
 
 
 @admin.route('/vendors/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
-def edit_dendor(id):
+def edit_vendor(id):
     """
-    Edit a dendor
+    Edit a vendor
     """
     check_admin()
 
-    add_dendor = False
+    add_vendor = False
 
-    dendor = Vendor.query.get_or_404(id)
-    form = VendorForm(obj=dendor)
+    vendor = Vendor.query.get_or_404(id)
+    form = VendorForm(obj=vendor)
     if form.validate_on_submit():
-        dendor.name = form.name.data
-        dendor.description = form.description.data
+        vendor.name = form.name.data
+        vendor.description = form.description.data
         db.session.commit()
-        flash('You have successfully edited the dendor.')
+        flash('You have successfully edited the vendor.')
 
         # redirect to the vendors page
-        return redirect(url_for('admin.list_dendors'))
+        return redirect(url_for('admin.list_vendors'))
 
-    form.description.data = dendor.description
-    form.name.data = dendor.name
-    return render_template('admin/vendors/dendor.html', action="Edit",
-                           add_dendor=add_dendor, form=form,
-                           dendor=dendor, title="Edit Vendor")
+    form.description.data = vendor.description
+    form.name.data = vendor.name
+    return render_template('admin/vendors/vendor.html', action="Edit",
+                           add_vendor=add_vendor, form=form,
+                           vendor=vendor, title="Edit Vendor")
 
 
 @admin.route('/vendors/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
-def delete_dendor(id):
+def delete_vendor(id):
     """
-    Delete a dendor from the database
+    Delete a vendor from the database
     """
     check_admin()
 
-    dendor = Vendor.query.get_or_404(id)
-    db.session.delete(dendor)
+    vendor = Vendor.query.get_or_404(id)
+    db.session.delete(vendor)
     db.session.commit()
-    flash('You have successfully deleted the dendor.')
+    flash('You have successfully deleted the vendor.')
 
     # redirect to the vendors page
-    return redirect(url_for('admin.list_dendors'))
+    return redirect(url_for('admin.list_vendors'))
 
     return render_template(title="Delete Vendor")
 
@@ -222,23 +222,23 @@ def list_employees():
 @login_required
 def assign_employee(id):
     """
-    Assign a dendor and a role to an employee
+    Assign a vendor and a role to an employee
     """
     check_admin()
 
     employee = Employee.query.get_or_404(id)
 
-    # prevent admin from being assigned a dendor or role
+    # prevent admin from being assigned a vendor or role
     if employee.is_admin:
         abort(403)
 
     form = EmployeeAssignForm(obj=employee)
     if form.validate_on_submit():
-        employee.dendor = form.dendor.data
+        employee.vendor = form.vendor.data
         employee.role = form.role.data
         db.session.add(employee)
         db.session.commit()
-        flash('You have successfully assigned a dendor and role.')
+        flash('You have successfully assigned a vendor and role.')
 
         # redirect to the roles page
         return redirect(url_for('admin.list_employees'))
