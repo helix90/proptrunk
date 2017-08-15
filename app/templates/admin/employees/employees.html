@@ -17,7 +17,7 @@
               <thead>
                 <tr>
                   <th width="15%"> Name </th>
-                  <th width="30%"> Department </th>
+                  <th width="30%"> Vendor </th>
                   <th width="30%"> Role </th>
                   <th width="15%"> Assign </th>
                 </tr>
@@ -35,8 +35,8 @@
                     <tr>
                       <td> {{ employee.first_name }} {{ employee.last_name }} </td>
                       <td>
-                        {% if employee.department %}
-                          {{ employee.department.name }}
+                        {% if employee.vendor %}
+                          {{ employee.vendor.name }}
                         {% else %}
                           -
                         {% endif %}
