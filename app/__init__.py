@@ -35,4 +35,7 @@ def create_app(config_name):
     from .home import home as home_blueprint
     app.register_blueprint(home_blueprint)
 
+    from .inventory import inventory as inventory_blueprint
+    app.register_blueprint(inventory_blueprint)
+    
     return app
