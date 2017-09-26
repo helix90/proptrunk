@@ -100,6 +100,9 @@ class Thing(db.Model):
     name = db.Column(db.String(255))
     description = db.Column(db.String(1024))
     owner = db.Column(db.String(255))
+    bc_image = db.Column(db.String(1024))
+    thumbnail = db.Column(db.String(1024))
+    base_image = db.Column(db.String(1024))
 
     def __repr__(self):
         return '<Item>: {}'.format(self.name)
