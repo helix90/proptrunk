@@ -107,7 +107,7 @@ class Thing(db.Model):
     def __repr__(self):
         return '<Item>: {}'.format(self.name)
 
-class Images(db.Model):
+class Image(db.Model):
     """
     Create an Image Table
     for paths to the image files
@@ -118,3 +118,5 @@ class Images(db.Model):
 
     id = db.Column(db.INT, primary_key=True)
     image_path = db.Column(db.String(2048))
+    item = db.relation('Thing', backref='id',
+                       lazy='dynamic')
