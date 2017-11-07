@@ -52,7 +52,7 @@ def load_user(user_id):
     return People.query.get(int(user_id))
 
 
-class Vendors(db.Model):
+class Vendor(db.Model):
     """
     Create a Vendor table
     """
