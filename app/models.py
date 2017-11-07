@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db, login_manager
 
 
-class People(UserMixin, db.Model):
+class Employee(UserMixin, db.Model):
     """
     Create an Employee table
     """
@@ -49,7 +49,7 @@ class People(UserMixin, db.Model):
 # Set up user_loader
 @login_manager.user_loader
 def load_user(user_id):
-    return People.query.get(int(user_id))
+    return Employee.query.get(int(user_id))
 
 
 class Vendor(db.Model):
@@ -62,7 +62,7 @@ class Vendor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
     description = db.Column(db.String(200))
-    employees = db.relationship('people', backref='vendor',
+    employees = db.relationship('Employee', backref='vendor',
                                 lazy='dynamic')
 
     def __repr__(self):
