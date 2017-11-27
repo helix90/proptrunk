@@ -14,3 +14,9 @@ class AddItem(FlaskForm):
     description = StringField('First Name', validators=[DataRequired()])
     owner = StringField('Last Name', validators=[DataRequired()])
     submit = SubmitField('Add')
+
+class AddEmployee(FlaskForm):
+    """
+    Form for adding an Employee to the database
+    """
+    name = StringField('Name', validators=[DataRequired()])
