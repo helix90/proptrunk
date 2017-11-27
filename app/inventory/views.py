@@ -13,3 +13,10 @@ def inventory():
     items = Thing.query.all()
     # render template
     return render_template('inventory/item.html', items=items, title='Inventory')
+
+@inventory.route('/inventory', methods=['GET', 'POST'])
+@login_required
+def item():
+    # show a single item
+    item = Thing.query()
+    return render_template('inventory/item.html', item=item, title='element')
