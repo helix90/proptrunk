@@ -134,6 +134,7 @@ class Images(db.Model):
 
     id = db.Column(db.INT, primary_key=True)
     image_path = db.Column(db.String(2048))
+    thumb_path = db.Column(db.String(2048))
     item = db.relation('Thing', backref='id',
                        lazy='dynamic')
 
