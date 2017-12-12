@@ -39,3 +39,4 @@ class AddEmployee(FlaskForm):
     Form for adding an Employee to the database
     """
     name = StringField('Name', validators=[DataRequired()])
+    submit = SubmitField('Submit')
