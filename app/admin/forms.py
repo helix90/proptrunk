@@ -33,3 +33,9 @@ class EmployeeAssignForm(FlaskForm):
     role = QuerySelectField(query_factory=lambda: Role.query.all(),
                             get_label="name")
     submit = SubmitField('Submit')
+
+class AddEmployee(FlaskForm):
+    """
+    Form for adding an Employee to the database
+    """
+    name = StringField('Name', validators=[DataRequired()])
