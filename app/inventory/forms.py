@@ -16,3 +16,7 @@ class AddItem(FlaskForm):
     submit = SubmitField('Add')
 
 
+'''
+Need to add Flask-Upload to this
+To address uploading the images for the item.
+'''
