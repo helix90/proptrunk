@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db, login_manager
 
 
-class Employees(UserMixin, db.Model):
+class Employee(UserMixin, db.Model):
     """
     Create an Employee table
     """
@@ -52,7 +52,7 @@ def load_user(user_id):
     return Employee.query.get(int(user_id))
 
 
-class Vendors(db.Model):
+class Vendor(db.Model):
     """
     Create a Vendor table
     """
@@ -69,9 +69,9 @@ class Vendors(db.Model):
         return '<Vendor: {}>'.format(self.name)
 
 
-class Customers(db.Model):
+class Customer(db.Model):
     """
-    Create a Vendor table
+    Create a Customer table
     """
 
     __tablename__ = 'customer'
@@ -85,7 +85,7 @@ class Customers(db.Model):
     def __repr__(self):
         return '<Vendor: {}>'.format(self.name)
 
-class Roles(db.Model):
+class Role(db.Model):
     """
     Create a Role table
     """
@@ -102,7 +102,7 @@ class Roles(db.Model):
         return '<Role: {}>'.format(self.name)
 
 
-class Things(db.Model):
+class Thing(db.Model):
     """
     Create a Thing table 
     for physical objects
@@ -123,7 +123,7 @@ class Things(db.Model):
     def __repr__(self):
         return '<Item>: {}'.format(self.name)
 
-class Images(db.Model):
+class Image(db.Model):
     """
     Create an Image Table
     for paths to the image files
@@ -138,7 +138,7 @@ class Images(db.Model):
     item = db.relation('Thing', backref='id',
                        lazy='dynamic')
 
-class Locations(db.Model):
+class Location(db.Model):
     """
     Locations of items
     """
