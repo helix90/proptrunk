@@ -7,7 +7,7 @@ from ..models import Thing
 
 @inventory.route('/inventory', methods=['GET', 'POST'])
 @login_required
-def inventory():
+def inventory_list():
     # show current inventory list
 
     items = Thing.query.all()
