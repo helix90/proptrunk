@@ -16,10 +16,14 @@ def before_request():
 def inventory_list():
     # show current inventory list
     # for the current user (vendor or customer)
+    image_list = []
     items = Thing.query.all()
+    for item in items:
+        tmp_list = Image.query(item=itemid)
+        image_list.extend(tmp_list)
     # render template
     # how do we get the image list?
-    return render_template('inventory/items.html', items=items, title='Inventory')
+    return render_template('inventory/items.html', items=items, image_list=image_list, title='Inventory')
 
 
 @inventory.route('/inventory', methods=['GET', 'POST'])
