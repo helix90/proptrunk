@@ -18,6 +18,7 @@ def inventory_list():
     # for the current user (vendor or customer)
     items = Thing.query.all()
     # render template
+    # how do we get the image list?
     return render_template('inventory/items.html', items=items, title='Inventory')
 
 
@@ -26,5 +27,6 @@ def inventory_list():
 def item(itemid = None):
     # show a single item
     # select by item number
+    # how do we get the image list?
     item = Thing.query(id=itemid)
     return render_template('inventory/item.html', item=item, title='element')
