@@ -5,18 +5,26 @@ from . import inventory
 from .. import db
 from ..models import Thing
 
+
+@app.before_request
+def before_request():
+    g.user = current_user
+
+
 @inventory.route('/inventory', methods=['GET', 'POST'])
 @login_required
 def inventory_list():
     # show current inventory list
-
+    # for the current user (vendor or customer)
     items = Thing.query.all()
     # render template
-    return render_template('inventory/item.html', items=items, title='Inventory')
+    return render_template('inventory/items.html', items=items, title='Inventory')
+
 
 @inventory.route('/inventory', methods=['GET', 'POST'])
 @login_required
-def item():
+def item(itemid = None):
     # show a single item
-    item = Thing.query()
+    # select by item number
+    item = Thing.query(id=itemid)
     return render_template('inventory/item.html', item=item, title='element')
