@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<div class="item-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="item-message">
+                    <h1>Project Prop Trunk</h1>
+                    <h3>The best company in the world!</h3>
+                    <ul>
+                        {%  for item in items %}
+                        <p>{{ item }}</p>
+                        {% endfor %}
+                    <hr class="item-divider">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
