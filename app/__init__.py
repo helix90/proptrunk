@@ -1,7 +1,6 @@
 # third-party imports
 from flask import Flask
 from flask import Flask, render_template
-from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -16,9 +15,9 @@ login_manager = LoginManager()
 def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_config[config_name])
-    app.config.from_pyfile('config.py')
+    if config_name != 'testing':
+        app.config.from_pyfile('config.py')
 
-    Bootstrap(app)
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_message = "You must be logged in to access this page."
@@ -38,6 +37,12 @@ def create_app(config_name):
 
     from .inventory import inventory as inventory_blueprint
     app.register_blueprint(inventory_blueprint)
+
+    from .api import api as api_blueprint
+    app.register_blueprint(api_blueprint)
+
+    from .checkout import checkout as checkout_blueprint
+    app.register_blueprint(checkout_blueprint)
 
     @app.errorhandler(403)
     def forbidden(error):

@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <title>{{ title }} | Project Prop Trunk</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
@@ -29,7 +28,7 @@
                       <li><a href="{{ url_for('admin.list_employees') }}">Employees</a></li>
                     {% else %}
                       <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
-                      <li><a href="{{ url_for('inventory.inventory') }}">Inventory</a></li>
+                      <li><a href="{{ url_for('inventory.inventory_list') }}">Inventory</a></li>
                     {% endif %}
                     <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                     <li><a><i class="fa fa-user"></i>  Hi, {{ current_user.username }}!</a></li>

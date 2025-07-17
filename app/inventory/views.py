@@ -1,12 +1,13 @@
 from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
+from flask import g
 
 from . import inventory
 from .. import db
 from ..models import Thing, Image
 
 
-@app.before_request
+@inventory.before_request
 def before_request():
     g.user = current_user
 

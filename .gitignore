@@ -91,3 +91,20 @@ ENV/
 # PyCharm IDE files
 .xml
 .idea/*
+
+# Pytest artifacts
+.pytest_cache/
+*.pytest_cache/
+# Test result files
+*.log
+*.tmp
+*.test
+*.out
+# JUnit XML reports
+junit-*.xml
+# Coverage reports
+.coverage
+coverage.xml
+htmlcov/
+# Other test artifacts
+.cache/

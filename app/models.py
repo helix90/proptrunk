@@ -20,7 +20,8 @@ class Employee(UserMixin, db.Model):
     last_name = db.Column(db.String(60), index=True)
     password_hash = db.Column(db.String(128))
     department_id = db.Column(db.Integer, db.ForeignKey('vendor.id'))
-    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
+    role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     is_admin = db.Column(db.Boolean, default=False)
 
     @property
@@ -49,7 +50,9 @@ class Employee(UserMixin, db.Model):
 # Set up user_loader
 @login_manager.user_loader
 def load_user(user_id):
-    return Employee.query.get(int(user_id))
+    from flask import current_app
+    with current_app.app_context():
+        return db.session.get(Employee, int(user_id))
 
 
 class Vendor(db.Model):
@@ -62,8 +65,8 @@ class Vendor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
     description = db.Column(db.String(200))
-    employees = db.relationship('Employees', backref='vendor',
-                                lazy='dynamic')
+    employees = db.relationship('Employee', backref='vendor',
+                                lazy='dynamic', foreign_keys='Employee.department_id')
 
     def __repr__(self):
         return '<Vendor: {}>'.format(self.name)
@@ -79,8 +82,8 @@ class Customer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
     description = db.Column(db.String(200))
-    employees = db.relationship('Employees', backref='customer',
-                                lazy='dynamic')
+    employees = db.relationship('Employee', backref='customer',
+                                lazy='dynamic', foreign_keys='Employee.customer_id')
 
     def __repr__(self):
         return '<Vendor: {}>'.format(self.name)
@@ -102,6 +105,13 @@ class Role(db.Model):
         return '<Role: {}>'.format(self.name)
 
 
+class Company(db.Model):
+    __tablename__ = 'company'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), unique=True)
+    things = db.relationship('Thing', backref='company', lazy='dynamic')
+
+
 class Thing(db.Model):
     """
     Create a Thing table 
@@ -114,11 +124,8 @@ class Thing(db.Model):
     barcode = db.Column(db.String(64), unique=True)
     name = db.Column(db.String(255))
     description = db.Column(db.String(1024))
-    owner = db.Column(db.String(255))
-    barcode = db.relation('Images', backref='barcode',
-                          lazy='dynamic')
-    owner = db.relation('Company', backref='owner',
-                        lazy='dynamic')
+    owner_id = db.Column(db.Integer, db.ForeignKey('company.id'))
+    images = db.relationship('Image', backref='thing', lazy='dynamic')
 
     def __repr__(self):
         return '<Item>: {}'.format(self.name)
@@ -135,8 +142,7 @@ class Image(db.Model):
     id = db.Column(db.INT, primary_key=True)
     image_path = db.Column(db.String(2048))
     thumb_path = db.Column(db.String(2048))
-    item = db.relation('Thing', backref='id',
-                       lazy='dynamic')
+    item_id = db.Column(db.Integer, db.ForeignKey('thing.id'))
 
 class Location(db.Model):
     """

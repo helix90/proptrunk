@@ -1,16 +1,27 @@
-{% import "bootstrap/utils.html" as utils %}
-{% import "bootstrap/wtf.html" as wtf %}
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block body %}
 <div class="content-section">
   <br/>
-  {{ utils.flashed_messages() }}
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
   <br/>
   <div class="center">
     <h1>Login to your account</h1>
     <br/>
-    {{ wtf.quick_form(form) }}
+    <form method="post">
+      {{ form.hidden_tag() }}
+      <p>{{ form.email.label }}<br>{{ form.email(size=32) }}</p>
+      <p>{{ form.password.label }}<br>{{ form.password(size=32) }}</p>
+      <p>{{ form.submit() }}</p>
+    </form>
   </div>
 </div>
 {% endblock %}
